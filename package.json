@@ -47,12 +47,10 @@
     "webpack": "^4.41.5"
   },
   "dependencies": {
-    "@types/es6-promise": "^3.3.0",
     "aws-sdk": "^2.610.0",
     "dynamodb": "^1.1.2",
     "joi": "^13.3.0",
     "lodash": "^4.17.15",
-    "lodash.isnumber": "^3.0.3",
     "serverless-offline-sns": "^0.68.0",
     "supertest": "^4.0.2"
   },
@@ -69,22 +67,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "jest2": {
-    "testRegex": "(/__tests__/*|(\\.|/)spec)\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "js",
-      "ts"
-    ],
-    "transform": {
-      "^.+\\.ts?$": "ts-jest"
-    },
-    "roots": [
-      "<rootDir>/src/"
-    ],
-    "verbose": true,
-    "testEnvironment": "node",
-    "preset": "ts-jest/presets/js-with-ts",
-    "testMatch": null
   }
 }
