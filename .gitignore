@@ -12,3 +12,6 @@ coverage
 coverage
 .DS_Store
 .vscode
+.webpack
+.build
+coverage

@@ -1,0 +1,5 @@
+export const AMOUNT_FORMAT_EXCEPTION = 'AmountFormatException'
+export const COMPANY_FORMAT_EXCEPTION = 'CompanyFormatException'
+export const COMPANY_DATA_ERROR_EXCEPTION = 'CompanyDataErrorException'
+export const COMPANY_DATA_INACTIVE_EXCEPTION = 'CompanyDataInactiveException'
+// const AMOUNT_FORMAT_EXCEPTION = 'AmountFormatException'
