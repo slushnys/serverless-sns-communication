@@ -1,29 +1,30 @@
 import { disburseLoan } from './utils/dbController'
 
-export default async (event: any) => {
-    try {
-        const loanId: String = event.Records[0].Sns.Message
+export default async (event: any) =>
+    new Promise(async (resolve, reject) => {
+        try {
+            const loanId: String = event.Records[0].Sns.Message
 
-        const updatedLoan = await disburseLoan(loanId)
-        if (updatedLoan) {
-            return {
-                statusCode: 200,
-                body: JSON.stringify({
-                    message: `Successfully disbursed loan id: ${loanId}`,
-                }),
+            const updatedLoan = await disburseLoan(loanId)
+            if (updatedLoan) {
+                resolve({
+                    statusCode: 200,
+                    body: JSON.stringify({
+                        message: `Successfully disbursed loan id: ${loanId}`,
+                    }),
+                })
+            } else {
+                reject({
+                    statusCode: 400,
+                    body: JSON.stringify({ message: 'Couldnt disburse the loan.' }),
+                })
             }
-        } else {
-            return {
-                statusCode: 400,
-                body: JSON.stringify({ message: 'Couldnt disburse the loan.' }),
-            }
-        }
-    } catch (error) {
-        console.error('ERROR', error)
+        } catch (error) {
+            console.error('ERROR', error)
 
-        return {
-            statusCode: 500,
-            body: error.stack,
+            reject({
+                statusCode: 500,
+                body: error.stack,
+            })
         }
-    }
-}
+    })

@@ -1,23 +1,21 @@
 {
   "compilerOptions": {
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "allowJs": true,
     "target": "es5",
-    "module": "esnext",
+    "outDir": ".build",
+    "module": "CommonJS",
     "moduleResolution": "node",
-    "lib": ["esnext", "esnext.asynciterable", "dom"],
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "allowJs": true,
-    "sourceMap": true,
+    "baseUrl": ".",
+    "lib": ["esnext", "DOM"],
+    "rootDir": "./",
+    "skipLibCheck": true,
     "strict": true,
     "checkJs": false,
-    "noEmit": true,
-    "skipLibCheck": true,
-    "outDir": ".build",
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["src/*"],
-      "@/*": ["src/*"]
-    },
     "types": ["@types/node", "@types/dynamodb", "@types/jest"]
   },
   "include": ["src/**/*.ts"],

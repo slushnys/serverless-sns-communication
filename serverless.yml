@@ -2,17 +2,16 @@ service: nodejs-assignment
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   region: eu-west-1
-  # environment:
-  #   APP_NAME: ${self:service}
-  #   AWS_ACCESS_KEY_ID: id_key
-  #   AWS_SECRET_ACCESS_KEY: access_key
-  # iamRoleStatements:
-  #   - Effect: "Allow"
-  #     Resource: "*"
-  #     Action:
-  #       - "sns:*"
+  profile: serverless
+  environment:
+    APP_NAME: ${self:service}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Resource: "*"
+      Action:
+        - "sns:*"
 
 package:
   exclude:
@@ -21,7 +20,6 @@ package:
     - node_modules/**
 
 plugins:
-  # - serverless-webpack
   - serverless-plugin-typescript
   - serverless-pseudo-parameters
   - serverless-dynamodb-local

@@ -17,6 +17,7 @@
     "test:watch": "NODE_ENV=test LOG_LEVEL=error jest --watch"
   },
   "devDependencies": {
+    "@shelf/jest-dynamodb": "^1.6.0",
     "@types/aws-lambda": "^8.10.40",
     "@types/dynamodb": "^1.2.0",
     "@types/jest": "^25.1.1",
@@ -24,6 +25,7 @@
     "@types/lodash": "^4.14.149",
     "@types/serverless": "^1.18.4",
     "@types/supertest": "^2.0.8",
+    "aws-sdk-mock": "^5.0.0",
     "babel-eslint": "^8.0.1",
     "eslint": "^4.7.2",
     "eslint-plugin-prettier": "^2.1.2",

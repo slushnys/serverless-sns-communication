@@ -7,18 +7,13 @@ export const sns = new AWS.SNS({
     region: 'eu-west-1',
 })
 
-export const docClient = new DocumentClient()
+export const docClient = new DocumentClient({ region: 'localhost' })
 
 dynamo.AWS.config.update({
     region: 'localhost',
     endpoint: 'http://localhost:8000',
 })
-
-// new Promise((resolve, reject) => {
-// dynamo.createTables(err => (err ? reject(err) : resolve()))
-// })
 dynamo.createTables()
-
 export const Loan = dynamo.define('Loan', {
     hashKey: 'id',
     timestamps: true,

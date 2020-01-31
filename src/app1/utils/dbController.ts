@@ -31,19 +31,30 @@ export const getAllLoans = async () =>
 
 export const deleteLoan = async (id: any) =>
     new Promise((resolve, reject) => {
-        Loan.destroy(id, { ReturnValues: 'ALL_OLD' }, function(err, loan: ILoan) {
-            if (err || loan === null) {
-                resolve({
+        docClient.delete({ TableName: 'loans', Key: { id } }, (err, data) => {
+            if (err)
+                reject({
                     statusCode: 404,
                     body: JSON.stringify({ message: 'Loan not found' }),
                 })
-            } else {
-                resolve({
-                    statusCode: 200,
-                    body: JSON.stringify(loan),
-                })
-            }
+            resolve({
+                statusCode: 200,
+                body: JSON.stringify(data),
+            })
         })
+        // Loan.destroy(id, { ReturnValues: 'ALL_OLD' }, function(err, loan: ILoan) {
+        //     if (err || loan === null) {
+        //         resolve({
+        //             statusCode: 404,
+        //             body: JSON.stringify({ message: 'Loan not found' }),
+        //         })
+        //     } else {
+        //         resolve({
+        //             statusCode: 200,
+        //             body: JSON.stringify(loan),
+        //         })
+        //     }
+        // })
     })
 export const getLoan = async (id: any) =>
     new Promise((resolve, reject) => {
@@ -51,7 +62,7 @@ export const getLoan = async (id: any) =>
             {
                 TableName: 'loans',
                 Key: {
-                    id: id,
+                    id,
                 },
             },
             (err: any, data) => {

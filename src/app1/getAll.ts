@@ -1,4 +1,3 @@
-import { Loan } from './utils/config'
 import { APIGatewayEvent } from 'aws-lambda'
 import { getAllLoans } from './utils/dbController'
 

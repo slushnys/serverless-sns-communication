@@ -1,45 +1,37 @@
-# Node.js Assignment (Serverless + eventing)
+# Serverless implementation with SNS
 
-> We are going to (re)write a simple loan application, that will be split in two apps and communicate with each other through events & commands. The main goal of this assignment is to test your skills understanding, implementing new functionality, refactoring and writing tests. The current code is full of bad practices and inconsistencies, and it's your goal to make it shine, keeping it simple enough.
+The purpose of this repository is to show the implementation of CRUD functionality within AWS lambda.
 
-### Requirements
+SNS is used for pub/sub purposes in order to update an attribute of a Model based on an external trigger.
 
--   Node v8.10.0
--   Serverless.com CLI
--   Yarn (optional)
+## Installation
 
-### Getting started
+> Note: Use --no-optional parameter to avoid npm installing `dtrace-provider` as an optional depenceny which emits module errors.
 
--   Install dependencies: `yarn install`
--   Install local dynamodb (required workaround): `serverless dynamodb install`
--   Run tests: `yarn test`
--   Run for development: `yarn start`
--   Check lint issues: `yarn lint`
+`npm install --no-optional`
 
-### Technologies
+Install DynamoDB locally:
 
--   Platform: Node.js
--   Programming language: Javascript (ES6) / Typescript
--   Framework: Serverless.com
--   Main AWS Services: Lambda, DybamoDB
+`serverless dynamodb install`
 
-## The assignment
+Start offline serverless service
 
--   To make it easy for you and for us, almost everything should run locally (note that serverless-offline and dynamodb-local are already in place)
--   Feel free to move, delete and create as many files as you need
--   The `app1` has most of the API that needs to be refactored and extended. The `app2` is the application responsible for the disbursement. No logic is required for the disbursement, it's only about sending the message back to `app1`. But feel free and creative if you have extra time.
--   We expect that you write unit tests for most of your code, but be pragmatic and don't try to cover 100%
--   Task 1: redesign the API and implement proper validations on inputs, with proper error messages and status code
--   Task 2: extend the create loan endpoint to also receive the `id` of the company on [openkvk](https://overheid.io/documentatie/openkvk). Only `active` companies should be allowed and you should store all information about the company on DynamoDB.
--   Task 3: implement asyncronous disburse functionality (see instructions below)
+`serverless offline start` or `npm run start`
 
-### Disbursement
+## Manual Testing
 
-You can use any queue/stream tools that you feel it fits best for an asyncronous communication of microservices / lambdas. At New10 we use Kinesis, so we can leverage triggers and security roles, but this is not required for this assignment.
-This is how the flow should work:
+To test the flow locally, run the offline serverless service and go to requests.http file. There are the "happy path" to go through in order to test function calls and responses.
 
--   app1: publishes `DisburseLoan` command
--   app2: consume `DisburseLoan` command
--   app2: publishes `LoanDisbursed` event
--   app1: consume `LoanDisbursed` event
--   app1: update status of disbursed loan to `disbursed`
+Explanation:
+
+1. Get all resources /all
+2. Create a resource passing a payload with amount and companyId parameters
+3. Query all to see if the loan has been created.
+4. Send a post request to /disburse endpoint with the loans id.
+5. Get all resources /all and check the status of that request which should have been updated to "disbursed" through SNS.
+
+## Automatic testing
+
+> Note: facing some problems running tests, sometimes it cannot recreate the tables that are created, sometimes it runs for too long due to async/await fault jest fault.
+
+`npm run test`

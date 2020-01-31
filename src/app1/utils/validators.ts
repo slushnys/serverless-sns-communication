@@ -1,10 +1,4 @@
 import { has, get, isNil } from 'lodash'
-import {
-    AMOUNT_FORMAT_EXCEPTION,
-    COMPANY_DATA_ERROR_EXCEPTION,
-    COMPANY_FORMAT_EXCEPTION,
-    COMPANY_DATA_INACTIVE_EXCEPTION,
-} from './exceptions'
 
 // type of any because through request it may be passed as a string
 export const validateBody = (body: any): Promise<any> =>

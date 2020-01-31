@@ -5,12 +5,11 @@ import {
     validatePathParameters,
 } from '../utils/validators'
 import { validateAmount } from '../utils/validators'
-import { AMOUNT_FORMAT_EXCEPTION } from '../utils/exceptions'
 import {
     inactiveCompanyResponse,
     activeCompanyResponse,
     companyNotFoundResponse,
-} from './kvkOpen.mock'
+} from '../__mocks__/kvkOpen.mock'
 
 var request = require('supertest')
 describe('create function tests', () => {
