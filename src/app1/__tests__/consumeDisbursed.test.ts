@@ -28,7 +28,23 @@ test('should update a loan to a disbursed one', async () => {
     const { Item: UpdatedItem } = await docClient
         .get({ TableName: 'loans', Key: { id: loanMock.id } })
         .promise()
-    console.log('UpdatedItem', UpdatedItem)
     const updatedItemMock = { ...loanMock, status: DISBURSED }
     expect(UpdatedItem).toEqual(updatedItemMock)
+})
+
+test('shouldnt disburse the loan', async () => {
+    const event = {
+        Records: [
+            {
+                Sns: {
+                    Message: 'random-id',
+                },
+            },
+        ],
+    }
+
+    expect(await consumeDisbursed(event)).toStrictEqual({
+        statusCode: 400,
+        body: JSON.stringify({ message: 'Couldnt disburse the loan.' }),
+    })
 })

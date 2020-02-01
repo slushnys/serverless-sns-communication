@@ -34,4 +34,8 @@ Explanation:
 
 > Note: facing some problems running tests, sometimes it cannot recreate the tables that are created, sometimes it runs for too long due to async/await fault jest fault.
 
-`npm run test`
+> Apparently when I run individual tests through VSCode the server doesn't close and the afterAll/afterEach callbacks don't trigger. Server also still keeps running therefore resulting in `ResourceInUseException: Cannot create preexisting table` error which was really annoying to keep on getting.
+
+To start the tests run
+
+`npm test`

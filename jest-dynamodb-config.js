@@ -8,6 +8,6 @@ module.exports = {
         },
         // etc
     ],
-    port: 8002,
+    port: 8000,
     options: ['-sharedDb'],
 }

@@ -6,9 +6,19 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb'
 export const sns = new AWS.SNS({
     region: 'eu-west-1',
 })
+const isTest = process.env.NODE_ENV === 'test'
+const docClientConfig = {
+    ...(isTest && {
+        convertEmptyValues: true,
+        endpoint: 'http://localhost:8000',
+        region: 'local',
+        sslEnabled: false,
+    }),
+}
 
-export const docClient = new DocumentClient({ region: 'localhost' })
-
+export const docClient = new DocumentClient({
+    ...docClientConfig,
+})
 dynamo.AWS.config.update({
     region: 'localhost',
     endpoint: 'http://localhost:8000',

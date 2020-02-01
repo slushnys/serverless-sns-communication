@@ -14,7 +14,7 @@ export default async (event: any) =>
                     }),
                 })
             } else {
-                reject({
+                resolve({
                     statusCode: 400,
                     body: JSON.stringify({ message: 'Couldnt disburse the loan.' }),
                 })
