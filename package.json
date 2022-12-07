@@ -34,7 +34,7 @@
     "pre-push": "^0.1.1",
     "prettier": "^1.7.2",
     "prettier-eslint": "^8.2.0",
-    "serverless": "^1.61.3",
+    "serverless": "^3.25.1",
     "serverless-dynamodb-local": "^0.2.30",
     "serverless-offline": "^3.23.1",
     "serverless-plugin-typescript": "^1.1.9",
